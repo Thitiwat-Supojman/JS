@@ -1,0 +1,51 @@
+WITH Combined AS (
+
+    SELECT 
+        in_sap_code AS SAP_CODE,
+        NULL AS BATCH,
+        SUM(in_qty) AS IN_QTY, 
+        0 AS OUT_QTY, 
+        in_date_import AS DATA_DATE,
+		NULL AS [ID]
+    FROM T_IN 
+    WHERE in_sap_code = @sapcode GROUP BY in_sap_code,in_date_import
+    
+    UNION ALL
+    
+    SELECT 
+        so_sap_code AS SAP_CODE,
+        so_batch AS BATCH,
+        0 AS IN_QTY, 
+        so_qty AS OUT_QTY, 
+        so_date AS DATA_DATE,
+		so_emp_id AS [ID]
+    FROM T_STOCK_OUT
+    WHERE so_sap_code = @sapcode and so_status = 'DONE'
+),
+OrderedData AS (
+    SELECT 
+        SAP_CODE,
+        BATCH,
+        IN_QTY,
+        OUT_QTY,
+        DATA_DATE,
+		[ID] ,
+        SUM(IN_QTY) OVER (
+            PARTITION BY SAP_CODE
+            ORDER BY DATA_DATE ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) - SUM(OUT_QTY) OVER (
+            PARTITION BY SAP_CODE
+            ORDER BY DATA_DATE ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW
+        ) AS TOTAL
+    FROM Combined
+)
+SELECT 
+    SAP_CODE, 
+    BATCH,
+    IN_QTY AS [IN], 
+    OUT_QTY AS [OUT], 
+    TOTAL, 
+    DATA_DATE AS [DATE],
+	[ID]
+FROM OrderedData
+ORDER BY DATA_DATE DESC
