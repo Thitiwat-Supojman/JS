@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>TEST</title>
+   
+</head>
+<body id="myBODY">
+    <button  onclick="clickTest()">Click</button>  
+<p id="myText"></p>
+<label id="myText2"></label>
+<button id="MyBtn">Click Me</button>   
+<button id="changecolor">Change Color</button>   
+
+
+  <script>
+    function clickTest(){
+        document.getElementById("myText2").innerHTML = "OK เปลี่ยนแล้วครับ";
+    }
+
+
+    const button = document.getElementById("MyBtn");
+    const ChangeButton = document.getElementById("changecolor");
+    button.addEventListener("click",function(){
+        alert("TESTGSEF");
+        const myText = document.getElementById("myText");
+        myText.innerHTML = "Test";
+    })
+
+
+    ChangeButton.addEventListener("mouseover",function(){
+        const mybody = document.getElementById("myBODY");
+        mybody.style.backgroundColor = "red";
+
+    })
+
+    ChangeButton.addEventListener("mouseout",function(){
+        const mybody = document.getElementById("myBODY");
+        mybody.style.backgroundColor = "white";
+
+    })
+  </script>
+</body>
+</html>
