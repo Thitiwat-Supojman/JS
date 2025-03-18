@@ -1,0 +1,43 @@
+String car, band;
+
+Console.WriteLine("คุณขัยรถ ? : ");
+car = Console.ReadLine();
+Console.WriteLine("ยี่ห้อ ? : ");
+band = Console.ReadLine();
+
+Car car1 = new Car(car, band, 2022, "red");
+
+Car car2 = new Car("Ford2", "Mustan2g", 2025, "red2");
+
+car1.Drive();
+car2.Drive();
+
+Console.WriteLine("รถทั้งหมด  = " + Car.num);
+
+
+
+class Car
+{
+    String make;
+    String model;
+    int year;
+    String color;
+
+    public static int num;
+
+    public Car(String make, String model, int year, String color)
+    {
+
+        this.make = make;
+        this.model = model;
+        this.year = year;
+        this.color = color;
+        num++;
+    }
+
+    public void Drive()
+    {
+        Console.WriteLine("You drive the " + make + " " + model + " " + color);
+    }
+
+}

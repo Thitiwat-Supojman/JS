@@ -1,0 +1,45 @@
+double x;
+double y;
+double z;
+double total;
+Boolean play = true;
+while (play)
+{
+    try
+    {
+        Console.WriteLine("Enter Number 1 : ");
+        double.TryParse(Console.ReadLine(), out x);
+        Console.WriteLine("Enter Number 2 : ");
+        double.TryParse(Console.ReadLine(), out y);
+        Console.WriteLine("Enter Number 3 : ");
+        z = Convert.ToDouble(Console.ReadLine());
+
+        total = Multiply(x, y, z);
+
+        Console.WriteLine("TOTAL : {0}", total);
+        break;
+    }
+    catch (FormatException e)
+    {
+        Console.WriteLine("PLS NUMBER");
+        play = true;
+    }
+    finally
+    {
+        Console.WriteLine("THX");
+    }
+}
+//Class
+static Double Multiply(params double[] prices)
+{
+    double total = 0;
+
+
+    foreach (double item in prices)
+    {
+
+        total += item;
+    }
+
+    return total;
+}

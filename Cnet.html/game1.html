@@ -1,0 +1,57 @@
+Boolean playgame = true;
+Random random = new Random();
+int numberrandom = 0;
+int max = 101;
+int min = 1;
+int IN = 0;
+int guess = 0;
+
+string response = "";
+
+while (playgame)
+{
+    numberrandom = random.Next(min, max);
+
+    while (numberrandom != IN)
+    {
+        Console.WriteLine("กรอกตัวเลข :");
+        IN = Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("NOW :" + IN);
+
+
+        if (IN < numberrandom)
+        {
+            Console.WriteLine("{0} LOW :", IN);
+
+        }
+        if (IN > numberrandom)
+        {
+            Console.WriteLine("{0} HiGHT :", IN);
+
+        }
+
+        guess++;
+    }
+
+
+    Console.WriteLine("ยินดีด้วยเลขที่ ถูกต้องคือ : {0}", IN);
+    Console.WriteLine("รอบที่เล่นทั้งหมด : {0}", guess);
+
+    Console.WriteLine("Would you like to play again (Y/N)");
+    response = Console.ReadLine();
+
+    if (response == "Y")
+    {
+        playgame = true;
+    }
+    else if (response == "N")
+    {
+        playgame = false;
+    }
+}
+
+Console.WriteLine("THX");
+
+
+
+Console.ReadKey();

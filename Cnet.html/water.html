@@ -1,0 +1,32 @@
+int fee = 50;
+int units = 0;
+int total = 0;
+
+Console.Write("ค่าน้ำประปา : ");
+units = Convert.ToInt32(Console.ReadLine());
+
+if (units >= 31)
+{
+    total += (units - 30) * 50;
+    units = 30;
+}
+
+if (units >= 21)
+{
+    total += (units - 20) * 30;
+    units = 20;
+}
+
+if (units >= 11)
+{
+    total += (units - 10) * 10;
+    units = 10;
+}
+if (units > 0)
+{
+    total += (units) * 5;
+}
+
+
+Console.WriteLine("Total : {0}", total + fee);
+Console.ReadKey();

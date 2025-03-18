@@ -1,0 +1,9 @@
+int age;
+string message;
+
+Console.WriteLine("กรุณาใส่เลขอายุ : ");
+int.TryParse(Console.ReadLine(), out age);
+
+message = (age >= 18) ? "OK" : "NOO อายุมึงไม่ถึงจ้าาา";
+
+Console.WriteLine(message);

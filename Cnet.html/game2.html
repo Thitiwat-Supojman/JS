@@ -1,0 +1,102 @@
+string itemsUer = "";
+string itemsCom = "";
+Random random = new Random();
+Boolean playgame = true;
+
+int ROCK = 0;
+int PAPER = 0;
+int SCISSORS = 0;
+
+int win = 0;
+
+string response = "";
+
+
+while (playgame)
+{
+    Console.WriteLine("You Select ROCK,PAPER,SCISSORS :");
+    itemsUer = Console.ReadLine();
+
+    switch (random.Next(1, 4))
+    {
+        case 1:
+            itemsCom = "ROCK";
+            break;
+        case 2:
+            itemsCom = "PAPER";
+            break;
+        case 3:
+            itemsCom = "SCISSORS";
+            break;
+    }
+    switch (itemsUer)
+    {
+        case "ROCK":
+            if (itemsCom == "ROCK")
+            {
+                Console.WriteLine("DREW !! COM :" + itemsCom);
+            }
+            else if (itemsCom == "PAPER")
+            {
+                Console.WriteLine("you Lose !! COM :" + itemsCom);
+            }
+            else if (itemsCom == "SCISSORS")
+            {
+                Console.WriteLine("you win !! COM :" + itemsCom);
+                win++;
+            }
+            break;
+        case "PAPER":
+            if (itemsCom == "ROCK")
+            {
+                Console.WriteLine("you win !! COM :" + itemsCom);
+                win++;
+            }
+            else if (itemsCom == "PAPER")
+            {
+                Console.WriteLine("DREW !! COM :" + itemsCom);
+            }
+            else if (itemsCom == "SCISSORS")
+            {
+                Console.WriteLine("you Lose !! COM :" + itemsCom);
+            }
+            break;
+        case "SCISSORS":
+            if (itemsCom == "ROCK")
+            {
+                Console.WriteLine("you Lose !! COM :" + itemsCom);
+            }
+            else if (itemsCom == "PAPER")
+            {
+                Console.WriteLine("you win !! COM :" + itemsCom);
+                win++;
+            }
+            else if (itemsCom == "SCISSORS")
+            {
+                Console.WriteLine("DREW !! COM :" + itemsCom);
+            }
+            break;
+    }
+    if (win > 0)
+    {
+        Console.WriteLine("Would you like to play again (Y/N)");
+        response = Console.ReadLine();
+
+        if (response == "Y")
+        {
+            playgame = true;
+            win = 0;
+        }
+        else if (response == "N")
+        {
+            playgame = false;
+            win = 0;
+        }
+
+
+    }
+
+}
+
+Console.WriteLine("THX");
+Console.ReadKey();

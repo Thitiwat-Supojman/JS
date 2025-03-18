@@ -1,0 +1,47 @@
+
+List<String> food = new List<String>();
+    food.Add("pizza");
+    food.Add("hamburger");
+    food.Add("hotdog");
+
+    food.Insert(1, "sushi");
+
+    string s = food[0];
+
+    foreach (var item in food)
+    {
+        Console.WriteLine(item);
+    }
+
+    Console.WriteLine("YouSelect = " + s);
+
+
+
+    List<Player> plays = new List<Player>();
+        Player play1 = new Player("A");
+        Player play2 = new Player("B");
+        Player play3 = new Player("C");
+       
+        plays.Add(play1);
+        plays.Add(play2);
+        plays.Add(play3);
+       
+        foreach (Player item in plays)
+        {
+            Console.WriteLine(item.username);
+        }
+       
+
+        class Player
+        {
+            public string username;
+      
+            public Player(string username)
+            {
+                this.username = username;
+            }
+        }
+        public override string ToString()
+        {
+            return base.ToString();
+        }
