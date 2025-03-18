@@ -1,0 +1,17 @@
+int money;
+do
+{
+    Console.Write("Input Money : ");
+    int.TryParse(Console.ReadLine(),out money);
+
+}
+while (money % 100 != 0);
+Console.WriteLine("Money = {0} ", money);
+Console.WriteLine("1000 Batch = {0} ", money/1000);
+money %= 1000;
+Console.WriteLine("500 Batch = {0} ", money /500);
+money %= 500;
+Console.WriteLine("100 Batch = {0} ", money / 100);
+money %= 100;
+
+Console.ReadKey();

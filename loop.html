@@ -7,19 +7,82 @@
 
 
   <script>
+//วนเฉยๆ  ผลลัพธ์ 1,2,3,4,5
 // const numbers = [1,2,3,4,5];
 // numbers.forEach(function(number){
 //      console.log(number);
 // })
 
+//ปรับเปลี่ยนค่า  ผลลัพธ์ 2,4,6,8,10
+// const numbers = [1,2,3,4,5];
+// const doubles = numbers.map(function(number){
+//      return number * 2 ;
+// })
+// doubles.forEach(function(number){
+//     console.log(number);
+// })
 
-const numbers = [1,2,3,4,5];
-const doubles = numbers.map(function(number){
-     return number * 2 ;
-})
-doubles.forEach(function(number){
-    console.log(number);
-})
+
+
+//หาค่าหารลงตัว 2  ผลลัพธ์ 2,4
+// const numbers = [1,2,3,4,5];
+// const even = numbers.filter(function(number){
+//      return number % 2  === 0;
+// })
+// even.forEach(function(number){
+//     console.log(number);
+// })
+
+
+
+//บวกไปเรื่อยๆ
+// const numbers = [1,2,3,4,5];
+// const sum = numbers.reduce(function(total ,number){
+//      return total + number ;
+// },0)
+// console.log(sum);
+
+
+
+
+//หาค่า true เช็คเงื่อนไขว่า return หารได้ไหม
+// const numbers = [1,2,3,4,5];
+// const hasEven = numbers.some(function(number){
+//      return number % 2  === 0 ;
+// })
+// console.log(hasEven);
+
+
+
+//หาค่าที่มากกว่าตามเงื่อนไข
+// const numbers = [1,2,3,4,5];
+// const allPositive = numbers.every(function(number){
+//      return number > 0 ;
+// })
+// console.log(allPositive);
+
+
+
+//หาค่าตัวแรก
+// const numbers = [1,2,3,4,5];
+// const firstEven = numbers.find(function(number){
+//     return number % 2 === 0 ;
+// })
+// console.log(firstEven);
+
+
+
+//หาค่าตัวแรกแต่เป็นใน Array
+// const numbers = [1,3,3,4,5];
+// const firstEvenIndex = numbers.findIndex(function(number){
+//     return number % 2 === 0 ;
+// })
+// console.log(firstEvenIndex);
+
+
+
+
+
 
 
 
