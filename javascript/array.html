@@ -1,0 +1,23 @@
+<html>
+
+<head>
+    <title>TEST</title>
+
+</head>
+
+<body id="myBODY">
+    <script>
+        function filterAndSort(arr) {
+            return arr.filter(num => num > 10).sort((a, b) => a - b);
+        }
+
+        console.log(filterAndSort([5, 20, 3, 15, 8, 12])); // [12, 15, 20]
+        console.log(filterAndSort([1, 2, 3, 4, 5]));      // []
+        console.log(filterAndSort([50, 10, 40]));         // [40, 50]
+
+
+
+    </script>
+</body>
+
+</html>

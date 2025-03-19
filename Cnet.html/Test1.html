@@ -1,0 +1,36 @@
+ห้องแบบ Standard และ Deluxe
+มีราคาต่อคืนที่แตกต่างกัน
+รองรับ Method Overriding เพื่อคำนวณราคาแต่ละประเภท
+
+Room standardRoom = new StandardRoom(3);
+Room deluxeRoom = new DeluxeRoom(3);
+
+Console.WriteLine($"Standard Room Price: {standardRoom.CalculatePrice()} THB");
+Console.WriteLine($"Deluxe Room Price: {deluxeRoom.CalculatePrice()} THB");
+
+
+
+abstract class Room
+{
+    protected int nights;
+    public Room(int nights) { this.nights = nights; }
+    public abstract double CalculatePrice();
+}
+
+// Derived Class (OOP: Inheritance + Polymorphism)
+class StandardRoom : Room
+{
+    public StandardRoom(int nights) : base(nights) { }
+    public override double CalculatePrice() => nights * 1500; // 1500 บาท/คืน
+}
+
+class DeluxeRoom : Room
+{
+    public DeluxeRoom(int nights) : base(nights) { }
+    public override double CalculatePrice() => nights * 2500; // 2500 บาท/คืน
+}
+
+
+คำตอบ 
+Standard Room Price: 4500 THB
+Deluxe Room Price: 7500 THB

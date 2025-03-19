@@ -1,0 +1,36 @@
+ให้ใช้ LINQ ค้นหาสินค้า ที่มีราคาเกิน 1,000 และเรียงตามราคา จากมากไปน้อย
+List<Product> products = new List<Product>
+    {
+        new Product("Laptop", 35000),
+        new Product("Mouse", 500),
+        new Product("Keyboard", 1200),
+        new Product("Monitor", 7000)
+    };
+
+    var expensiveProducts = products
+        .Where(p => p.Price > 1000)
+        .OrderByDescending(p => p.Price)
+        .ToList();
+
+    foreach (var p in expensiveProducts)
+        Console.WriteLine($"{p.Name}: {p.Price} THB");
+
+
+
+        class Product
+{
+    public string Name { get; set; }
+    public double Price { get; set; }
+
+    public Product(string name, double price)
+    {
+        Name = name;
+        Price = price;
+    }
+}
+
+
+
+Laptop: 35000 THB
+Monitor: 7000 THB
+Keyboard: 1200 THB

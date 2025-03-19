@@ -1,0 +1,25 @@
+<html>
+
+<head>
+    <title>TEST</title>
+
+</head>
+
+<body id="myBODY">
+    <script>
+        function fetchUserData() {
+            return new Promise(resolve => {
+                setTimeout(() => {
+                    resolve("User data loaded");
+                }, 2000);
+            });
+        }
+
+        fetchUserData().then(console.log);
+        // "User data loaded" (หลังจาก 2 วินาที)
+
+
+    </script>
+</body>
+
+</html>

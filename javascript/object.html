@@ -1,0 +1,31 @@
+<html>
+
+<head>
+    <title>TEST</title>
+
+</head>
+
+<body id="myBODY">
+    <script>
+
+        const person = {
+            name: "John",
+            age: 25,
+            address: {
+                city: "Bangkok",
+                country: "Thailand"
+            }
+        };
+
+        function getPersonInfo(obj) {
+            return `${obj.name} อายุ ${obj.age} ปี อยู่ที่ ${obj.address.city}, ${obj.address.country}`;
+        }
+
+        console.log(getPersonInfo(person));
+        // "John อายุ 25 ปี อยู่ที่ Bangkok, Thailand"
+        // 60
+
+    </script>
+</body>
+
+</html>
