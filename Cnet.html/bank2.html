@@ -38,6 +38,79 @@ Console.WriteLine("คุณต้องการทราบบัญชีไ�
 
 Console.WriteLine("แบงค์ที่ต้องการค้นหา = {0}",bank.GetAccount(Console.ReadLine()));
 
+
+BankAccount accountlogin = null;
+Boolean play = true;
+while (play)
+{
+    Console.Write(" Login (Enter Account Number): ");
+    string inputId = Console.ReadLine();
+    accountlogin = bank.GetAccount(inputId);
+
+    if (accountlogin == null)
+    {
+        Console.WriteLine("Account not found. Please try again.");
+        play = true;
+    }
+    else
+    {
+        Console.WriteLine("ยินดีต้อนรับ คุณจะทำรายการอะไร ? ฝาก กด D ถอน กด W ");
+        string A = Console.ReadLine();
+        Boolean play2 = true;
+
+
+        while(play2)
+        if (A == "D")
+        {
+                Console.Write("💰 คุณต้องการฝากเงินกี่บาท: ");
+                if (decimal.TryParse(Console.ReadLine(), out decimal depositAmount))
+                {
+                    accountlogin.Deposit(depositAmount);
+                    Console.WriteLine($"✅ ฝากเงิน {depositAmount:C} สำเร็จ! ยอดเงินปัจจุบัน: {accountlogin.GetBalance():C}");
+                    Console.WriteLine(accountlogin); // แสดงข้อมูลบัญชี Alice
+                    play2 = false;
+                }
+                else
+                {
+                    Console.WriteLine("❌ กรุณากรอกจำนวนเงินให้ถูกต้อง");
+                }
+
+              
+                
+            }
+        else if(A == "W")
+        {
+
+                Console.Write("💸 คุณต้องการถอนเงินกี่บาท: ");
+                if (decimal.TryParse(Console.ReadLine(), out decimal withdrawAmount))
+                {
+                    if (accountlogin.Withdraw(withdrawAmount))
+                    {
+                        Console.WriteLine($"✅ ถอนเงิน {withdrawAmount:C} สำเร็จ! ยอดเงินปัจจุบัน: {accountlogin.GetBalance():C}");
+                        Console.WriteLine(accountlogin); // แสดงข้อมูลบัญชี Alice
+                    }
+                    else
+                    {
+                        Console.WriteLine("❌ ยอดเงินไม่เพียงพอ หรือ กรอกจำนวนเงินไม่ถูกต้อง");
+                    }
+                }
+
+                   
+             
+         }
+        else
+         {
+                Console.WriteLine("กรอกผิด กรุณากรอกใหม่");
+                play2 = true;
+        }
+            
+
+        
+    }
+}
+
+
+
 Console.ReadKey();
          
 
