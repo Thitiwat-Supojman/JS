@@ -1,0 +1,61 @@
+BankAccount account = new BankAccount(1000);
+account.Deposit(500);  // ฝากเงิน 500
+account.Withdraw(200); // ถอนเงิน 200
+account.PrintBalance(); // แสดงยอดเงิน
+
+
+
+class BankAccount
+{
+    private decimal balance; // ใช้ private field เพื่อป้องกันการเข้าถึงโดยตรง
+
+    public BankAccount(decimal initialBalance = 0)
+    {
+        if (initialBalance < 0)
+        {
+            Console.WriteLine("Invalid initial balance. Setting balance to 0.");
+            balance = 0;
+        }
+        else
+        {
+            balance = initialBalance;
+        }
+    }
+
+    public void Deposit(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Deposit amount must be a positive number.");
+            return;
+        }
+        balance += amount;
+        Console.WriteLine($"Deposited: {amount}. New Balance: {balance}");
+    }
+
+    public void Withdraw(decimal amount)
+    {
+        if (amount <= 0)
+        {
+            Console.WriteLine("Withdraw amount must be a positive number.");
+            return;
+        }
+        if (amount > balance)
+        {
+            Console.WriteLine("Insufficient balance for withdrawal.");
+            return;
+        }
+        balance -= amount;
+        Console.WriteLine($"Withdrawn: {amount}. New Balance: {balance}");
+    }
+
+    public decimal GetBalance()
+    {
+        return balance;
+    }
+
+    public void PrintBalance()
+    {
+        Console.WriteLine($"Current Balance: {balance}");
+    }
+}

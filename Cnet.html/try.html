@@ -43,3 +43,24 @@ static Double Multiply(params double[] prices)
 
     return total;
 }
+
+
+
+*******************
+
+try
+{
+    Console.WriteLine(DivideNumbers(10, 0));
+}
+catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
+
+
+
+static double DivideNumbers(int a, int b) {
+    if (b == 0) throw new DivideByZeroException("Cannot divide by zero");
+    return (double)a / b;
+}
+

@@ -1,0 +1,63 @@
+<html>
+
+<head>
+    <title>TEST</title>
+
+</head>
+
+<body id="myBODY">
+    <script>
+        class BankAccount {
+    #balance; // ประกาศตัวแปร private
+
+    constructor(initialBalance = 0) {
+        if (typeof initialBalance !== "number" || initialBalance < 0) {
+            console.warn("Invalid initial balance. Setting balance to 0.");
+            this.#balance = 0;
+        } else {
+            this.#balance = initialBalance;
+        }
+    }
+
+    deposit(amount) {
+        if (typeof amount !== "number" || amount <= 0) {
+            console.warn("Deposit amount must be a positive number.");
+            return;
+        }
+        this.#balance += amount;
+        console.log(`Deposited: ${amount}. New Balance: ${this.#balance}`);
+    }
+
+    withdraw(amount) {
+        if (typeof amount !== "number" || amount <= 0) {
+            console.warn("Withdraw amount must be a positive number.");
+            return;
+        }
+        if (amount > this.#balance) {
+            console.warn("Insufficient balance for withdrawal.");
+            return;
+        }
+        this.#balance -= amount;
+        console.log(`Withdrawn: ${amount}. New Balance: ${this.#balance}`);
+    }
+
+    getBalance() {
+        return this.#balance;
+    }
+
+    printBalance() {
+        console.log(`Current Balance: ${this.#balance}`);
+    }
+}
+
+// ✅ ทดสอบการใช้งาน
+const account = new BankAccount(1000);
+account.deposit(500);  // ฝากเงิน 500
+account.withdraw(200); // ถอนเงิน 200
+account.printBalance(); // แสดงยอดเงิน
+
+
+    </script>
+</body>
+
+</html>

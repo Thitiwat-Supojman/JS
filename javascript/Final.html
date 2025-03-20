@@ -1,0 +1,76 @@
+class BankAccount {
+    #balance; // private field
+
+    constructor(initialBalance = 0) {
+        this.#balance = initialBalance < 0 ? 0 : initialBalance;
+    }
+
+    deposit(amount) {
+        if (amount > 0) this.#balance += amount;
+    }
+
+    withdraw(amount) {
+        if (amount > 0 && amount <= this.#balance) {
+            this.#balance -= amount;
+        } else {
+            console.log("Insufficient funds or invalid amount.");
+        }
+    }
+
+    getBalance() {
+        return this.#balance;
+    }
+}
+
+const account = new BankAccount(5000);
+account.deposit(2000);
+account.withdraw(3000);
+console.log(account.getBalance()); // Output: 4000
+
+
+*******************
+
+const people = [
+    { name: "Alice", age: 25 },
+    { name: "Bob", age: 35 },
+    { name: "Charlie", age: 40 },
+    { name: "David", age: 28 }
+];
+
+const filteredPeople = people.filter(person => person.age > 30);
+
+filteredPeople.forEach(person => console.log(person.name)); // Output: Bob, Charlie
+
+***************************
+
+
+async function fetchDataFromAPI() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve("Data fetched from API"), 2000);
+    });
+}
+
+async function main() {
+    console.log("Fetching data...");
+    const data = await fetchDataFromAPI();
+    console.log(data); // Output: Data fetched from API
+}
+
+main();
+
+
+****************************
+
+function divideNumbers(a, b) {
+    if (b === 0) {
+        throw new Error("Cannot divide by zero");
+    }
+    return a / b;
+}
+
+try {
+    console.log(divideNumbers(10, 2)); // Output: 5
+    console.log(divideNumbers(10, 0)); // Throws error
+} catch (error) {
+    console.log(error.message); // Output: Cannot divide by zero
+}

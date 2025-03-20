@@ -1,0 +1,11 @@
+Console.WriteLine("Fetching data...");
+string data = await GetDataFromDB();
+Console.WriteLine($"Data: {data}");
+
+
+
+
+static async Task<string> GetDataFromDB() {
+    await Task.Delay(2000);
+    return "Database Data Loaded";
+}
