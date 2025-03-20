@@ -1,0 +1,62 @@
+class CustomerQueue
+{
+    private Queue<string> queue = new Queue<string>();  // เก็บคิวของลูกค้า
+    private object lockObj = new object(); // ใช้ lock ป้องกัน race condition
+
+    public void AddCustomer(string name)
+    {
+        lock (lockObj)  // ป้องกันหลายเธรดเข้าถึงข้อมูลพร้อมกัน
+        {
+            queue.Enqueue(name);
+            Console.WriteLine($"{name} has entered the queue. Queue count: {queue.Count}");
+        }
+    }
+
+    public void ServeCustomer()
+    {
+        lock (lockObj)
+        {
+            if (queue.Count > 0)
+            {
+                string servedCustomer = queue.Dequeue();
+                Console.WriteLine($"{servedCustomer} is being served. Queue count: {queue.Count}");
+            }
+            else
+            {
+                Console.WriteLine("No customers to serve.");
+            }
+        }
+    }
+}
+
+
+
+CustomerQueue customerQueue = new CustomerQueue();
+
+// สร้างเธรดสำหรับเพิ่มลูกค้าอัตโนมัติทุก 2 วินาที
+Thread addCustomerThread = new Thread(() =>
+{
+    string[] customers = { "Alice", "Bob", "Charlie", "David", "Emma" };
+    Random rand = new Random();
+    while (true)
+    {
+        string customer = customers[rand.Next(customers.Length)];
+        customerQueue.AddCustomer(customer);
+        Thread.Sleep(2000);  // หยุดรอ 2 วินาทีก่อนเพิ่มลูกค้าคนใหม่
+    }
+});
+
+// สร้างเธรดสำหรับให้บริการลูกค้าอัตโนมัติทุก 3 วินาที
+Thread serveCustomerThread = new Thread(() =>
+{
+    while (true)
+    {
+        customerQueue.ServeCustomer();
+        Thread.Sleep(3000);  // หยุดรอ 3 วินาทีก่อนให้บริการลูกค้าคนต่อไป
+    }
+});
+
+addCustomerThread.Start();  // เริ่มเธรดเพิ่มลูกค้า
+serveCustomerThread.Start();  // เริ่มเธรดให้บริการลูกค้า
+
+Console.ReadLine();  // รอให้โปรแกรมรันไปเรื่อย ๆ

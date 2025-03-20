@@ -1,0 +1,110 @@
+Bank bank = new Bank(); // สร้างออบเจ็กต์ธนาคาร
+
+// สร้างบัญชีใหม่ให้ Alice และ Bob
+var acc1 = new BankAccount("12345", "Alice", 5000);
+var acc2 = new BankAccount("67890", "Bob", 10000);
+
+bank.AddAccount(acc1); // เพิ่มบัญชี Alice
+bank.AddAccount(acc2); // เพิ่มบัญชี Bob
+
+
+acc1.Deposit(2000); // ฝากเงิน 2000 เข้าบัญชี Alice
+acc2.Withdraw(500);  // ถอนเงิน 500 ออกจากบัญชี Bob
+
+Console.WriteLine(acc1); // แสดงข้อมูลบัญชี Alice
+Console.WriteLine(acc2); // แสดงข้อมูลบัญชี Bob
+
+// แสดงยอดเงินรวมของทุกบัญชีในธนาคาร
+Console.WriteLine($"Total Bank Balance: {bank.GetTotalBalance():C}");
+
+
+
+
+
+
+// ค้นหาบัญชีที่มียอดเงินอยู่ระหว่าง 6,000 - 12,000
+List<BankAccount> accountsInRange = bank.GetAccountsByBalance(6000, 12000);
+
+// แสดงผลลัพธ์
+Console.WriteLine("Accounts with balance between 6,000 and 12,000:");
+foreach (var account in accountsInRange)
+{
+    Console.WriteLine(account);
+}
+
+
+
+Console.WriteLine("คุณต้องการทราบบัญชีไหน : ");
+
+Console.WriteLine("แบงค์ที่ต้องการค้นหา = {0}",bank.GetAccount(Console.ReadLine()));
+
+Console.ReadKey();
+         
+
+
+class BankAccount
+{
+    // หมายเลขบัญชี (ไม่สามารถเปลี่ยนแปลงได้หลังจากสร้าง)
+    public string AccountNumber { get; private set; }
+
+    // ชื่อเจ้าของบัญชี (ไม่สามารถเปลี่ยนแปลงได้หลังจากสร้าง)
+    public string Owner { get; private set; }
+
+    // ยอดเงินในบัญชี (กำหนดเป็น private เพื่อไม่ให้แก้ไขโดยตรง)
+    private decimal balance;
+
+
+    // คอนสตรักเตอร์: ใช้สร้างบัญชี พร้อมกำหนดยอดเงินเริ่มต้น
+    public BankAccount(string accountNumber, string owner, decimal initialBalance = 0)
+    {
+        AccountNumber = accountNumber;
+        Owner = owner;
+
+        // ตรวจสอบว่าเงินเริ่มต้นต้องไม่ติดลบ
+        balance = initialBalance >= 0 ? initialBalance : 0;
+    }
+
+    // เมทอดสำหรับฝากเงินเข้าบัญชี
+    public void Deposit(decimal amount)
+    {
+        if (amount > 0) balance += amount; // เงินฝากต้องมากกว่า 0
+    }
+
+    // เมทอดสำหรับถอนเงินจากบัญชี
+    public bool Withdraw(decimal amount)
+    {
+        if (amount > 0 && amount <= balance) // ตรวจสอบว่าเงินที่ถอนต้องไม่น้อยกว่าหรือมากกว่ายอดเงินในบัญชี
+        {
+            balance -= amount;
+            return true; // ถอนสำเร็จ
+        }
+        return false; // ถอนล้มเหลว (เงินไม่พอ)
+    }
+    // เมทอดสำหรับเช็คยอดเงินในบัญชี
+    public decimal GetBalance() => balance;
+
+    // เมทอดแสดงรายละเอียดบัญชี
+    public override string ToString()
+    {
+        return $"Account: {AccountNumber}, Owner: {Owner}, Balance: {balance:C}";
+    }
+}
+
+    class Bank
+    {
+        private List<BankAccount> accounts = new List<BankAccount>(); // เก็บรายการบัญชีทั้งหมด
+
+        // เพิ่มบัญชีใหม่เข้าระบบธนาคาร
+        public void AddAccount(BankAccount account) => accounts.Add(account);
+
+        // ค้นหาบัญชีตามหมายเลขบัญชี
+        public BankAccount GetAccount(string accountNumber) =>
+            accounts.FirstOrDefault(a => a.AccountNumber == accountNumber);
+
+        // คำนวณยอดรวมของเงินทั้งหมดในธนาคาร
+        public decimal GetTotalBalance() => accounts.Sum(a => a.GetBalance());
+
+        // ค้นหาบัญชีที่มียอดเงินอยู่ในช่วงที่กำหนด
+        public List<BankAccount> GetAccountsByBalance(decimal min, decimal max) =>
+            accounts.Where(a => a.GetBalance() >= min && a.GetBalance() <= max).ToList();
+    }
